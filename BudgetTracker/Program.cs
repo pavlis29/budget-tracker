@@ -1,5 +1,8 @@
 ﻿using BudgetTracker.Models;
-
+using BudgetTracker.Services;
+Directory.CreateDirectory("data");
+Directory.CreateDirectory("logs");
+StorageService storage = new StorageService("data");
 Console.WriteLine("Welcome to Budget Tracker!");
 while (true)
 {
@@ -53,6 +56,8 @@ while (true)
             description ?? "",
             amount
         );
+        string path = storage.GetFilePath(transaction);
+        Console.WriteLine(path);
         System.Console.WriteLine($"Type: {transaction.Type} - Description: {transaction.Description} - Amount: {transaction.Amount} - Id: {transaction.Id} - Timestamp: {transaction.Timestamp}");
     }
     else if (choice == "2")
