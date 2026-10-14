@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Welcome to Budget Tracker!");
+﻿using BudgetTracker.Models;
+
+Console.WriteLine("Welcome to Budget Tracker!");
 while (true)
 {
     Console.WriteLine("1. Add transaction");
@@ -9,7 +11,43 @@ while (true)
     string? choice = Console.ReadLine();
     if (choice == "1")
     {
-        System.Console.WriteLine("Add transaction selected");
+        TransactionType type;
+        while(true)
+        {
+            System.Console.WriteLine("Enter type (Income/Expense):");
+            string? typeInput = Console.ReadLine();
+            bool typeParsed = Enum.TryParse(typeInput,
+            true, out type);
+            if (typeParsed && Enum.IsDefined(type))
+            {
+                break;
+            }
+            else
+            {
+                System.Console.WriteLine("Enter Income or Expense.");
+            }
+        }
+        System.Console.WriteLine("Enter description: ");
+        string? description = Console.ReadLine();
+        decimal amount;
+        while(true)
+        {
+            System.Console.WriteLine("Enter amount: ");
+            string? amountInput = Console.ReadLine();
+            bool parsed = decimal.TryParse(amountInput, out amount);
+            if (parsed && amount > 0)
+            {
+                break;
+            }
+            else
+            {
+                System.Console.WriteLine("Enter a valid amount greater than zero.");
+            }
+        }
+        Guid id = Guid.NewGuid();
+        DateTimeOffset timestamp = DateTimeOffset.Now;
+        System.Console.WriteLine($"Type: {type} - Description: {description} - Amount: {amount} - Id: {id} - Timestamp: {timestamp}");
+        
     }
     else if (choice == "2")
     {
