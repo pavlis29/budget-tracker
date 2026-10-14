@@ -46,8 +46,14 @@ while (true)
         }
         Guid id = Guid.NewGuid();
         DateTimeOffset timestamp = DateTimeOffset.Now;
-        System.Console.WriteLine($"Type: {type} - Description: {description} - Amount: {amount} - Id: {id} - Timestamp: {timestamp}");
-        
+        Transaction transaction = new Transaction(
+            id,
+            timestamp,
+            type,
+            description ?? "",
+            amount
+        );
+        System.Console.WriteLine($"Type: {transaction.Type} - Description: {transaction.Description} - Amount: {transaction.Amount} - Id: {transaction.Id} - Timestamp: {transaction.Timestamp}");
     }
     else if (choice == "2")
     {
