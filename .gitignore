@@ -432,3 +432,6 @@ FodyWeavers.xsd
 
 # macOS
 .DS_Store
+# Local budget data
+**/data/
+**/logs/
